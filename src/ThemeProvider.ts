@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-import WebApp from "./api/webapp";
+import { WebApp } from "./api/webapp";
 
 export const createTelegramTheme = () => {
   const {

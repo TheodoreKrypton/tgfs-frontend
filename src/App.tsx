@@ -11,6 +11,7 @@ import {
 import { Tasks } from "./components/Tasks";
 import { Welcome } from "./components/Welcome";
 import { createTelegramTheme } from "./ThemeProvider";
+import { inTelegram } from "./api/webapp";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,11 @@ const router = createBrowserRouter(
 );
 
 export const App = () => {
+  console.log("inTelegram", inTelegram());
+
+  if (!inTelegram()) {
+    return <RouterProvider router={router} />;
+  }
   const theme = createTelegramTheme();
   return (
     <ThemeProvider theme={theme}>
