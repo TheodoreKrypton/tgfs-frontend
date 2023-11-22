@@ -1,11 +1,15 @@
 import React from "react";
+import { Form } from "react-router-dom";
 
-import { Form, useLocation } from "react-router-dom";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 import tgfs from "src/api/tgfs";
 
 export const Welcome = () => {
   const [baseURL, setBaseURL] = React.useState<string>(tgfs.getBaseURL());
+  const [username, setUsername] = React.useState<string>(tgfs.getUsername());
+  const [password, setPassword] = React.useState<string>(tgfs.getPassword());
 
   const handleBaseURLChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,22 +18,66 @@ export const Welcome = () => {
     []
   );
 
+  const handleUserNameChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setUsername(event.target.value);
+    },
+    []
+  );
+
+  const handlePasswordChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(event.target.value);
+    },
+    []
+  );
+
   const handleSubmit = (event: React.SyntheticEvent) => {
     tgfs.setBaseURL(baseURL);
+    tgfs.setUsername(username);
+    tgfs.setPassword(password);
   };
 
   return (
     <div>
       <div>
         <Form onSubmit={handleSubmit} action="/tasks">
-          <label htmlFor="base-url">Base URL</label>
-          <input
+          <TextField
+            required
             id="base-url"
-            type="text"
-            value={baseURL}
+            label="API URL"
+            defaultValue={baseURL}
+            variant="filled"
+            margin="dense"
+            fullWidth
             onChange={handleBaseURLChange}
           />
-          <input type="submit" value="Connect" />
+          <TextField
+            required
+            id="username"
+            label="Username"
+            defaultValue={username}
+            variant="filled"
+            margin="dense"
+            fullWidth
+            onChange={handleUserNameChange}
+          />
+          <TextField
+            required
+            id="password"
+            label="Password"
+            defaultValue={password}
+            variant="filled"
+            type="password"
+            margin="dense"
+            fullWidth
+            onChange={handlePasswordChange}
+          />
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Button variant="text" type="submit">
+              Connect
+            </Button>
+          </div>
         </Form>
       </div>
     </div>

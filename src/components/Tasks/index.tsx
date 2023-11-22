@@ -1,16 +1,10 @@
 import React from "react";
 
+import { List } from "@mui/material";
+
 import tgfs from "src/api/tgfs";
 
-type Task = {
-  id: string;
-  fileName: string;
-  totalSize: number;
-  completedSize: number;
-  status: "queuing" | "in-progress" | "completed";
-  type: "download" | "upload";
-  beginTime: number;
-};
+import { Task, TaskListItem } from "./Task";
 
 type GetTaskResponse = {
   download: Map<string, Task>;
@@ -33,22 +27,24 @@ export const Tasks = () => {
     })();
   }, []);
 
-  React.useEffect(() => {
-    console.log(tasks);
-  }, [tasks]);
-
   return (
     <div>
-      <div>
+      <List dense>
         {Array.from(tasks.download.keys()).map((taskId: string) => {
-          return <span key={taskId}>{tasks.download.get(taskId)?.id}</span>;
+          return (
+            <span key={taskId}>
+              <TaskListItem task={tasks.download.get(taskId)!} />
+            </span>
+          );
         })}
-      </div>
-      <div>
         {Array.from(tasks.upload.keys()).map((taskId: string) => {
-          return <span key={taskId}>{tasks.upload.get(taskId)?.id}</span>;
+          return (
+            <span key={taskId}>
+              <TaskListItem task={tasks.upload.get(taskId)!} />
+            </span>
+          );
         })}
-      </div>
+      </List>
     </div>
   );
 };
