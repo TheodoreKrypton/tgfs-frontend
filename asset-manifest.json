@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/tgfs-frontend/static/js/main.3e38725b.js",
+    "main.js": "/tgfs-frontend/static/js/main.03b3fcf2.js",
     "index.html": "/tgfs-frontend/index.html",
-    "main.3e38725b.js.map": "/tgfs-frontend/static/js/main.3e38725b.js.map"
+    "main.03b3fcf2.js.map": "/tgfs-frontend/static/js/main.03b3fcf2.js.map"
   },
   "entrypoints": [
-    "static/js/main.3e38725b.js"
+    "static/js/main.03b3fcf2.js"
   ]
 }
